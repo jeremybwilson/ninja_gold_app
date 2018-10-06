@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ninja Gold</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
+    <link rel="stylesheet" 
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+    crossorigin="anonymous" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/first_app/css/styles.css' %}" />
+  </head>
+  <body>
+        
+    <div class="container">
+        <div class="row">
+            <h1>Welcome to the {# title #} page</h1>
+        </div>
+        {% if request.session.curr_gold %}
+        <div class="row your_gold">
+          <h3>Your Gold:</h3> <input type="text" value="{{ request.session.curr_gold }}" />
+        </div>
+        {% endif %}
+        <div class="row">
+            <div class="destinations">
+                <div class="farm">
+                <h2>Farm</h2>
+                <p>earns (10-20) gold</p>
+                <div class="form-group">
+                    <form action="/process/" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="location" value="farm">
+                    <button type="submit" class="btn btn-primary">Find Gold</button>
+                    </form>
+                </div>
+                </div><!-- /.farm -->
+                <div class="cave">
+                <h2>Cave</h2>
+                <p>earns (5-10) gold</p>
+                <div class="form-group">
+                    <form action="/process/" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="location" value="cave">
+                    <button type="submit" class="btn btn-primary">Find Gold</button>
+                    </form>
+                </div>
+                </div><!-- /.cave -->
+                <div class="house">
+                <h2>House</h2>
+                <p>earns (2-5) gold</p>
+                <div class="form-group">
+                    <form action="/process/" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="location" value="house">
+                    <button type="submit" class="btn btn-primary">Find Gold</button>
+                    </form>
+                </div>
+                </div><!-- /.house -->
+                <div class="casino">
+                <h2>Casino</h2>
+                <p>earns/loses (0-50) gold</p>
+                <div class="form-group">
+                    <form action="/process/" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="location" value="casino">
+                    <button type="submit" class="btn btn-primary">Find Gold</button>
+                    </form>
+                </div>
+                </div><!-- /.casino -->
+            </div><!-- /.destinations -->
+            <div class="results">
+                <div class="form-group">
+                    <form action="/reset" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="location" value="casino">
+                        <!-- <input type="submit" class="btn btn-primary" value='Reset'> -->
+                        <button type="submit" class="btn btn-primary">Reset</button>
+                    </form>
+                </div>
+                <h3>Results</h3>
+                <div class="results_log">
+                {% for action in request.session.history %}
+                    <p class="{{action.class}}">{{ action.description }}</p>
+                {% endfor %}
+                </div>
+            </div><!-- /.results -->
+        </div>
+    </div>
+</body>
+</html>

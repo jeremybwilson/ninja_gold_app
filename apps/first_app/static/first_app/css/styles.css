@@ -1,0 +1,57 @@
+.gold {
+    color: gold;
+}
+
+h1, h2, h3, h4, h5, p, .destinations {
+    display: block;
+    width: 100%;
+  }
+
+  .red, p.red {
+    color: red;
+  }
+
+  .green, p.green {
+    color: green;
+  }
+
+
+  .gold, p.gold {
+    color: gold;
+  }
+
+  .farm, .cave, .house, .casino {
+    display: inline-block;
+    width: 22%;
+    border: 1px solid black;
+    border-radius: 5px;
+  }
+
+  .farm, .cave, .house, .casino, .results {
+    margin: 10px 10px;
+    text-align: center;
+  }
+
+  .results {
+    width: 100%;
+  }
+
+  .your_gold, .results_log {
+    margin: 0 auto;
+  }
+
+  .your_gold>h3, .your_gold>input {
+    display: inline-block;
+    width: 13%;
+  }
+
+  .results_log {
+    border: 2px solid black;
+      border-radius: 5px;
+    overflow-y: auto;
+    height: 200px;
+  }
+  
+  .results_log p {
+    margin-bottom: 0px;
+  }
